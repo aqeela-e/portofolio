@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqeela Nashwa | AI Engineer & Full Stack Developer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-primary">
+    <!-- Animated Background Elements -->
+    <div class="floating-orb orb-1 top-20 left-10"></div>
+    <div class="floating-orb orb-2 top-1/2 right-20"></div>
+    <div class="floating-orb orb-3 bottom-40 left-1/3"></div>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="certificate-modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-accent" id="modalTitle">Certificate Title</h3>
+                <button id="closeModal" class="text-accent hover:text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="certificate-view">
+                <iframe id="certificateFrame" src="" width="800" height="600" style="border: none; border-radius: 10px;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-opacity-90 backdrop-blur-sm bg-secondary py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-xl font-bold text-accent glow">Portfolio</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Home</a>
+                <a href="#skills" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Skills</a>
+                <a href="#experience" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Experience</a>
+                <a href="#projects" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Projects</a>
+                <a href="#certificates" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Certificates</a>
+                <a href="#services" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Services</a>
+                <a href="#contact" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-text-primary focus:outline-none transform hover:scale-110 transition-transform">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary py-4 px-6">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="text-text-primary hover:text-accent transition-colors duration-300">Home</a>
+                <a href="#skills" class="text-text-primary hover:text-accent transition-colors duration-300">Skills</a>
+                <a href="#experience" class="text-text-primary hover:text-accent transition-colors duration-300">Experience</a>
+                <a href="#projects" class="text-text-primary hover:text-accent transition-colors duration-300">Projects</a>
+                <a href="#certificates" class="text-text-primary hover:text-accent transition-colors duration-300">Certificates</a>
+                <a href="#services" class="text-text-primary hover:text-accent transition-colors duration-300">Services</a>
+                <a href="#contact" class="text-text-primary hover:text-accent transition-colors duration-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center py-20 px-6 relative overflow-hidden">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <!-- Profile Card 3D -->
+            <div class="w-full md:w-2/5 mb-12 md:mb-0 flex justify-center fade-in">
+                <div class="card-3d w-80 h-96 bg-secondary rounded-2xl p-6 shadow-2xl glow border border-accent border-opacity-30">
+                    <div class="flex flex-col items-center h-full justify-center">
+                        <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-accent mb-6 pulse-glow">
+                            <img src="fotoku.jpeg" alt="Profile" class="w-full h-full object-cover">
+                        </div>
+                        <h2 class="text-2xl font-bold text-center mb-2 animated-name">Aqeela Nashwa</h2>
+                        <p class="text-text-secondary text-center mb-6">AI Engineer & Full Stack Developer</p>
+                        
+                        <!-- Download CV Button -->
+                        <a href="cv-aqeela-nashwa.pdf" download class="w-full px-6 py-3 bg-accent text-primary font-bold rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 pulse-glow text-center flex items-center justify-center">
+                            <i class="fas fa-download mr-2"></i>Download CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Intro Text -->
+            <div class="w-full md:w-3/5 text-center md:text-left fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <div class="typing-container">
+                        <span class="typing-animation" id="typing-name">Aqeela Nashwa</span>
+                    </div>
+                </h1>
+                <p class="text-xl md:text-2xl text-text-secondary mb-6 fade-in" id="typing-subtitle">AI Engineer & Full Stack Developer</p>
+                <p class="text-lg text-text-primary max-w-2xl mb-8 fade-in">
+                    I am an AI Engineer with experience in developing machine learning and deep learning solutions. 
+                    I have a passion for creating technology that solves complex problems and delivers positive impact.
+                    Currently pursuing my degree while actively building professional experience through projects and research.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="#projects" class="px-6 py-3 bg-accent text-primary font-medium rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 pulse-glow">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="px-6 py-3 border border-accent text-accent font-medium rounded-lg hover:bg-accent hover:bg-opacity-10 transition-all duration-300 transform hover:scale-105">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+            <div class="flex flex-col items-center">
+                <span class="text-text-secondary mb-2">Scroll to explore</span>
+                <div class="w-6 h-10 border-2 border-accent rounded-full flex justify-center">
+                    <div class="w-1 h-3 bg-accent rounded-full mt-2 animate-bounce"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 bg-secondary bg-opacity-50 relative overflow-hidden">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Skills & Expertise</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Soft Skills -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8 text-accent">Soft Skills</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="fade-in">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Problem Solving</span>
+                                <span class="text-accent">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="fade-in">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Team Collaboration</span>
+                                <span class="text-accent">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="fade-in">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Communication</span>
+                                <span class="text-accent">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="fade-in">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Leadership</span>
+                                <span class="text-accent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hard Skills -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8 text-accent">Technical Skills</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="fade-in">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Python & AI/ML</span>
+                                <span class="text-accent">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="fade-in">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Web Development</span>
+                                <span class="text-accent">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="fade-in">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Data Analysis</span>
+                                <span class="text-accent">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="fade-in">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Cloud Computing</span>
+                                <span class="text-accent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tech Stack Icons -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold mb-8 text-center text-accent">Tech Stack</h3>
+                <div class="flex flex-wrap justify-center gap-8">
+                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300">
+                        <i class="fab fa-python text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
+                    </div>
+                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 0.2s;">
+                        <i class="fab fa-js-square text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
+                    </div>
+                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 0.4s;">
+                        <i class="fab fa-react text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
+                    </div>
+                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 0.6s;">
+                        <i class="fab fa-node-js text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
+                    </div>
+                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 0.8s;">
+                        <i class="fab fa-aws text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
+                    </div>
+                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 1s;">
+                        <i class="fas fa-database text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-6 relative overflow-hidden">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Experience & Research</h2>
+            
+            <div class="timeline">
+                <!-- Experience 1 - Community Service 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
+                                <i class="fas fa-hands-helping text-accent"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Independent Community Service</h3>
+                                <p class="text-text-secondary">Pignatelli Triputra University | January – August 2024</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience Image -->
+                        <img src="pkmm1.jpeg" alt="Community Service 1" class="experience-image">
+                        
+                        <p class="text-text-primary mb-4">
+                            As part of the community service program, I served as MC and teaching assistant in 
+                            technology education activities for elementary school children. Responsible for presenting 
+                            materials, teaching Microsoft Word and Canva usage, and providing basic laptop usage 
+                            introduction to students.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Public Speaking</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Microsoft Word</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Literacy</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Teaching</span>
+                        </div>
+                        
+                        <!-- Experience Links -->
+                        <div class="experience-links">
+                            <a href="https://youtu.be/uRQJlrswUu0?si=peZ1RNrq_A582I8Z" target="_blank" class="experience-link">
+                                <i class="fab fa-youtube"></i> Activity Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience 2 - Community Service 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
+                                <i class="fas fa-chalkboard-teacher text-accent"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Canva Learning Media Training</h3>
+                                <p class="text-text-secondary">Pignatelli Triputra University | October 2024</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience Image -->
+                        <img src="pkmm2.jpeg" alt="Canva Training" class="experience-image">
+                        
+                        <p class="text-text-primary mb-4">
+                            As part of the community service program, I served as MC and teaching assistant, 
+                            responsible for facilitating training on creating learning media using Canva for 
+                            elementary school educators.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Public Speaking</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Canva</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Literacy</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Teaching</span>
+                        </div>
+                        
+                        <!-- Experience Links -->
+                        <div class="experience-links">
+                            <a href="https://youtu.be/ZXLjIDZfO_w?si=5chWMK11lovogLBW" target="_blank" class="experience-link">
+                                <i class="fab fa-youtube"></i> Activity Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience 3 - Research Assistant Museum -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
+                                <i class="fas fa-search text-accent"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Research Assistant</h3>
+                                <p class="text-text-secondary">Nusantara Keris Museum | 2024</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience Image -->
+                        <img src="research.jpeg" alt="Research Assistant Museum" class="experience-image">
+                        
+                        <p class="text-text-primary mb-4">
+                            As a Research Assistant, I collaborated with faculty advisors in research and development 
+                            of a virtual visit platform for Nusantara Keris Museum. Responsible for virtual tour technology 
+                            research, interface design, and system implementation that enables visitors to explore 
+                            Nusantara keris collections digitally with an immersive experience.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Documentation</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Web Development</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Heritage</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Research</span>
+                        </div>
+                        
+                        <!-- Experience Links -->
+                        <div class="experience-links">
+                            <a href="https://rri.co.id/daerah/1219587/museum-keris-nusantara-luncurkan-fitur-virtual-visit" target="_blank" class="experience-link">
+                                <i class="fas fa-newspaper"></i> Media Coverage
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience 4 - Fullstack Developer PKM -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
+                                <i class="fas fa-code text-accent"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Fullstack Developer & Digital Marketing</h3>
+                                <p class="text-text-secondary">PKM Project - Lempeng Singkong | 2025</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience Image -->
+                        <img src="web.jpeg" alt="Fullstack Development" class="experience-image">
+                        
+                        <p class="text-text-primary mb-4">
+                            As Fullstack Developer in the PKM program, responsible for developing business website 
+                            for Lempeng Singkong MSME using Laravel framework. In addition to system development, 
+                            also handled digital marketing by creating viral TikTok content and managing all social 
+                            media to increase brand awareness and product sales.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Laravel</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Fullstack Development</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Marketing</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">TikTok Content</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Social Media</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">PHP</span>
+                        </div>
+                        
+                        <!-- Experience Links -->
+                        <div class="experience-links">
+                            <a href="http://griyasingkong.com" target="_blank" class="experience-link">
+                                <i class="fas fa-external-link-alt"></i> Griya Singkong Website
+                            </a>
+                            <a href="https://tiktok.com" target="_blank" class="experience-link">
+                                <i class="fab fa-tiktok"></i> TikTok Content
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience 5 - KRENOVA Competition -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
+                                <i class="fas fa-trophy text-accent"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">KRENOVA Finalist & City Representative</h3>
+                                <p class="text-text-secondary">Krenova Competition | 2025</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience Image -->
+                        <img src="kren.jpeg" alt="Krenova Competition" class="experience-image">
+                        
+                        <p class="text-text-primary mb-4">
+                            As main presenter in the team, successfully brought our innovation system into the Top 15 
+                            KRENOVA Finalists. Responsible for presenting the system to the jury panel and answering 
+                            technical questions. This achievement led the team to represent Solo City in the city-level 
+                            competition, demonstrating recognition for the quality of innovation developed.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Public Speaking</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Technical Presentation</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Innovation Competition</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Team Leadership</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 bg-secondary bg-opacity-50 relative overflow-hidden">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Projects</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 - AgroAI -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-20">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="proj3.jpeg" 
+                             alt="AgroAI Project" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <h3 class="text-xl font-bold text-white">AgroAI - Smart Agriculture</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-text-secondary mb-4">AI system for optimal crop recommendations based on soil condition analysis using machine learning and neural networks.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Python</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">TensorFlow</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Streamlit</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Machine Learning</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/aqeela-e/AgroAI" target="_blank" 
+                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
+                                <i class="fab fa-github mr-2"></i> GitHub
+                            </a>
+                            <a href="https://agroai.streamlit.app" target="_blank" 
+                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 - SmartNotes Web App -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-20">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="proj1.jpeg" 
+                             alt="SmartNotes Project" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <h3 class="text-xl font-bold text-white">SmartNotes Web App</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-text-secondary mb-4">Web application with hybrid cryptography (RC4 + XChaCha20) for data security with SINTA 5 journal publication research.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Laravel</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Cryptography</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">JavaScript</span>
+                            <span class="px-3 py-1 bg-accent text-primary rounded-full text-xs font-bold">SINTA 5</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://aqeela-e.github.io/secure-notes/" target="_blank" 
+                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
+                                <i class="fab fa-github mr-2"></i> GitHub
+                            </a>
+                            <a href="https://smartnotes-app.com" target="_blank" 
+                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 - Griya Singkong E-Commerce -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-20">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="proj2.jpeg" 
+                             alt="Griya Singkong Project" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <h3 class="text-xl font-bold text-white">Griya Singkong E-Commerce</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-text-secondary mb-4">E-commerce platform for local MSME with digital marketing features and viral TikTok content to boost sales.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Laravel</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Marketing</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">TikTok API</span>
+                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">MySQL</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/aqeela-e/lempeng-cengklok" target="_blank" 
+                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
+                                <i class="fab fa-github mr-2"></i> GitHub
+                            </a>
+                            <a href="https://griyasingkong.com" target="_blank" 
+                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
+                                <i class="fas fa-external-link-alt mr-2"></i> Website
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20 px-6 relative overflow-hidden">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Certificates & Achievements</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Certificate 1 - AWS Back-End Academy -->
+                <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="sertif1.jpeg" 
+                             alt="AWS Back-End Certificate" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <i class="fab fa-aws text-4xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
+                                <i class="fas fa-cloud text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">AWS Back-End Academy</h3>
+                        </div>
+                        <p class="text-text-secondary mb-4 text-sm">Dicoding x AWS - Cloud Computing fundamentals, EC2, S3, Lambda, and backend development with JavaScript/Node.js.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-accent text-sm">2025</span>
+                            <div class="flex gap-2">
+                                <a href="https://www.dicoding.com/certificates/your-certificate-id" target="_blank" 
+                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                    <i class="fas fa-external-link-alt mr-1"></i> View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 2 - IDCamp AI Engineer -->
+                <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="sertif2.jpeg" 
+                             alt="AI Engineer Certificate" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <i class="fas fa-robot text-4xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
+                                <i class="fas fa-brain text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">AI Engineer Track</h3>
+                        </div>
+                        <p class="text-text-secondary mb-4 text-sm">IDCamp 2025 by Dicoding x Indosat - Fundamental AI, machine learning models, data preprocessing, and model evaluation.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-accent text-sm">2025</span>
+                            <div class="flex gap-2">
+                                <a href="https://www.dicoding.com/certificates/your-ai-certificate" target="_blank" 
+                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                    <i class="fas fa-external-link-alt mr-1"></i> View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 3 - Cybersecurity Fundamentals -->
+                <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="sertif3.jpeg" 
+                             alt="Cybersecurity Certificate" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-4xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
+                                <i class="fas fa-lock text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Cybersecurity Fundamentals</h3>
+                        </div>
+                        <p class="text-text-secondary mb-4 text-sm">Kominfo & Cisco Networking Academy - 4 cybersecurity domains: attacks/concepts, data privacy, organizational protection, career paths.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-accent text-sm">2024</span>
+                            <div class="flex gap-2">
+                                <a href="https://www.netacad.com/certificates/your-cyber-cert" target="_blank" 
+                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                    <i class="fas fa-external-link-alt mr-1"></i> View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 4 - Data Analyst -->
+                <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="sertif4.jpeg" 
+                             alt="Data Analyst Certificate" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <i class="fas fa-server text-4xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
+                                <i class="fas fa-code text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Data Analyst</h3>
+                        </div>
+                        <p class="text-text-secondary mb-4 text-sm">Exploring Data Analyst Careers Through Microsoft Excel.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-accent text-sm">2023</span>
+                            <div class="flex gap-2">
+                                <a href="https://www.dicoding.com/certificates/your-backend-cert" target="_blank" 
+                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                    <i class="fas fa-external-link-alt mr-1"></i> View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 5 - SINTA 5 Journal Publication -->
+                <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="jurnal.jpeg" 
+                             alt="Journal Publication" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <i class="fas fa-book text-4xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
+                                <i class="fas fa-graduation-cap text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">SINTA 5 Journal Publication</h3>
+                        </div>
+                        <p class="text-text-secondary mb-4 text-sm">Hybrid cryptography research publication in SINTA 5 accredited journal - contribution to data security and encryption.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-accent text-sm">2024</span>
+                            <div class="flex gap-2">
+                                <a href="https://sinta.kemdikbud.go.id/journals/profile/your-journal" target="_blank" 
+                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Journal
+                                </a>
+                                <a href="https://your-research-paper-link.com" target="_blank" 
+                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                    <i class="fas fa-file-pdf mr-1"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Achievement Badges -->
+            <div class="mt-16 text-center">
+                <h3 class="text-2xl font-bold mb-8 text-accent">Additional Achievements</h3>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <div class="bg-primary rounded-xl p-4 border border-accent border-opacity-20 transform hover:scale-105 transition-transform duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-medal text-accent text-2xl"></i>
+                        </div>
+                        <p class="text-text-primary text-sm font-semibold">Journal Publication</p>
+                        <p class="text-text-secondary text-xs">2025</p>
+                    </div>
+                    <div class="bg-primary rounded-xl p-4 border border-accent border-opacity-20 transform hover:scale-105 transition-transform duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-star text-accent text-2xl"></i>
+                        </div>
+                        <p class="text-text-primary text-sm font-semibold">5+ Dicoding Certs</p>
+                        <p class="text-text-secondary text-xs">Avg 90%+ Score</p>
+                    </div>
+                    <div class="bg-primary rounded-xl p-4 border border-accent border-opacity-20 transform hover:scale-105 transition-transform duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-project-diagram text-accent text-2xl"></i>
+                        </div>
+                        <p class="text-text-primary text-sm font-semibold">20+ Projects</p>
+                        <p class="text-text-secondary text-xs">Completed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-6 bg-secondary bg-opacity-50 relative overflow-hidden">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Services</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Assignment Services -->
+                <div class="card-3d bg-primary rounded-xl p-8 shadow-xl border border-accent border-opacity-20">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
+                            <i class="fas fa-tasks text-2xl text-accent"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Assignment Services</h3>
+                    </div>
+                    <p class="text-text-secondary mb-6">
+                        Providing programming, machine learning, and AI assignment services with guaranteed quality and timely delivery.
+                    </p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>Programming Assignments (Python, Java, C++)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>Machine Learning Projects</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>Data Analysis & Visualization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>Web Development Projects</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="px-6 py-3 bg-accent text-primary font-medium rounded-lg inline-block hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 pulse-glow">
+                        Order Now
+                    </a>
+                </div>
+                
+                <!-- Project Development -->
+                <div class="card-3d bg-primary rounded-xl p-8 shadow-xl border border-accent border-opacity-20">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
+                            <i class="fas fa-laptop-code text-2xl text-accent"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Project Development</h3>
+                    </div>
+                    <p class="text-text-secondary mb-6">
+                        Developing small to medium scale projects with focus on AI, machine learning, and web development.
+                    </p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>AI & Machine Learning Solutions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>Web Application Development</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>Data Processing & Analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-3"></i>
+                            <span>API Development & Integration</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="px-6 py-3 bg-accent text-primary font-medium rounded-lg inline-block hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 pulse-glow">
+                        Consult Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Contact</h2>
+            
+            <div class="card-3d bg-secondary rounded-xl p-8 shadow-xl border border-accent border-opacity-30">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold mb-4 text-accent">Let's Collaborate!</h3>
+                    <p class="text-text-secondary max-w-2xl mx-auto">
+                        Interested in working together or have questions? Feel free to reach out through the contacts below.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <a href="mailto:nashwaaqeela562@gmail.com" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
+                            <i class="fas fa-envelope text-2xl text-accent"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Email</h4>
+                        <p class="text-text-secondary text-sm">nashwaaqeela562@gmail.com</p>
+                    </a>
+                    
+                    <a href="tel:087878581257" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
+                            <i class="fas fa-phone text-2xl text-accent"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Phone</h4>
+                        <p class="text-text-secondary text-sm">+62 878-7858-1257</p>
+                    </a>
+                    
+                    <div class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
+                            <i class="fas fa-map-marker-alt text-2xl text-accent"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Location</h4>
+                        <p class="text-text-secondary text-sm">Surakarta, Indonesia</p>
+                    </div>
+                    
+                    <a href="https://linkedin.com/in/aqeela-nashwa" target="_blank" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
+                            <i class="fab fa-linkedin text-2xl text-accent"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">LinkedIn</h4>
+                        <p class="text-text-secondary text-sm">Aqeela Nashwa</p>
+                    </a>
+                    
+                    <a href="https://github.com/aqeela-e" target="_blank" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
+                            <i class="fab fa-github text-2xl text-accent"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">GitHub</h4>
+                        <p class="text-text-secondary text-sm">aqeela-e</p>
+                    </a>
+                    
+                    <a href="https://instagram.com/kilaaysl" target="_blank" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
+                            <i class="fab fa-instagram text-2xl text-accent"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Instagram</h4>
+                        <p class="text-text-secondary text-sm">@kilaaysl</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 bg-secondary">
+        <div class="container mx-auto text-center">
+            <p class="text-text-secondary">© 2025 Aqeela Nashwa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
