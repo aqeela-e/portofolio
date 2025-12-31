@@ -3,41 +3,570 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aqeela Nashwa | Software Engineer </title>
+    <title>portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        /* Card Hover Effects */
+        .project-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mobile-Optimized Timeline */
+        .timeline-mobile {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .timeline-mobile::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .timeline-item-mobile {
+            padding: 0 0 30px 50px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item-mobile:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item-mobile::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 12px;
+            background-color: var(--primary);
+            border: 4px solid var(--accent);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-content-mobile {
+            background: linear-gradient(135deg, var(--secondary), rgba(30, 41, 59, 0.8));
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content-mobile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), rgba(59, 130, 246, 0.3));
+        }
+
+        /* Desktop Timeline */
+        .timeline-desktop {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-desktop::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--accent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+
+        .timeline-item-desktop {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item-desktop:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item-desktop:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content-desktop {
+            padding: 25px;
+            background: linear-gradient(135deg, var(--secondary), rgba(30, 41, 59, 0.9));
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content-desktop::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), rgba(59, 130, 246, 0.3));
+        }
+
+        /* Project Preview Animation */
+        .project-preview-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 200px;
+            background: linear-gradient(45deg, #1e293b, #334155);
+        }
+
+        .project-preview {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(0.9);
+            transition: transform 0.5s ease;
+            border-radius: 8px;
+        }
+
+        .project-card:hover .project-preview {
+            transform: scale(1);
+        }
+
+        .preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-preview-container:hover .preview-overlay {
+            opacity: 1;
+        }
+
+        /* Loading Animation for Project Preview */
+        .preview-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--secondary);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Section Titles */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Floating Elements */
+        .floating-orb {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .glow {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        .experience-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .experience-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .experience-link:hover {
+            background: rgba(59, 130, 246, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            padding: 0 1rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator i {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        /* Experience Header */
+        .experience-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+
+        .experience-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(59, 130, 246, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .experience-icon i {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        .experience-title-container {
+            flex: 1;
+        }
+
+        .experience-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .experience-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Tags Styling */
+        .experience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .experience-tag {
+            padding: 6px 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .experience-tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .timeline-desktop {
+                display: none;
+            }
+            
+            .timeline-mobile {
+                display: block;
+            }
+            
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .experience-icon {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .timeline-content-mobile {
+                padding: 18px;
+            }
+            
+            .experience-link {
+                min-width: 100%;
+            }
+            
+            .experience-image {
+                max-height: 180px;
+                margin: 12px 0;
+            }
+            
+            .section-title::after {
+                width: 60px;
+                bottom: -8px;
+            }
+            
+            .floating-orb {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .timeline-mobile {
+                display: none;
+            }
+            
+            .timeline-desktop {
+                display: block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .experience-tag {
+                padding: 5px 10px;
+                font-size: 0.7rem;
+            }
+            
+            .timeline-content-mobile {
+                padding: 16px;
+            }
+            
+            .experience-header {
+                gap: 8px;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.2rem;
+            }
+            
+            .experience-link {
+                min-width: calc(50% - 5px);
+            }
+        }
+
+        /* Ensure iframes are responsive */
+        .project-preview {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-primary">
-    <div class="floating-orb orb-1 top-20 left-10"></div>
-    <div class="floating-orb orb-2 top-1/2 right-20"></div>
-    <div class="floating-orb orb-3 bottom-40 left-1/3"></div>
-    <div id="certificateModal" class="certificate-modal">
-        <div class="modal-content">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-2xl font-bold text-accent" id="modalTitle">Certificate Title</h3>
-                <button id="closeModal" class="text-accent hover:text-white text-2xl">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="certificate-view">
-                <iframe id="certificateFrame" src="" width="800" height="600" style="border: none; border-radius: 10px;"></iframe>
-            </div>
-        </div>
-    </div>
+    <!-- Floating orbs - hidden on mobile for better performance -->
+    <div class="floating-orb orb-1 top-20 left-10 hidden sm:block"></div>
+    <div class="floating-orb orb-2 top-1/2 right-20 hidden sm:block"></div>
+    <div class="floating-orb orb-3 bottom-40 left-1/3 hidden sm:block"></div>
 
     <nav class="fixed w-full z-50 bg-opacity-90 backdrop-blur-sm bg-secondary py-4">
-        <div class="container mx-auto px-6 flex justify-between items-center">
+        <div class="container mx-auto px-4 sm:px-6 flex justify-between items-center">
             <div class="text-xl font-bold text-accent glow">Portfolio</div>
             <div class="hidden md:flex space-x-8">
-                <a href="#home" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Home</a>
-                <a href="#skills" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Skills</a>
                 <a href="#experience" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Experience</a>
                 <a href="#projects" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Projects</a>
-                <a href="#certificates" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Certificates</a>
-                <a href="#services" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Services</a>
-                <a href="#contact" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Contact</a>
+                <a href="#certificates" class="text-text-primary hover:text-accent transition-all duration-300 transform hover:scale-110">Achievements</a>
             </div>
             <div class="md:hidden">
                 <button id="menu-toggle" class="text-text-primary focus:outline-none transform hover:scale-110 transition-transform">
@@ -48,221 +577,65 @@
         
         <div id="mobile-menu" class="hidden md:hidden bg-secondary py-4 px-6">
             <div class="flex flex-col space-y-4">
-                <a href="#home" class="text-text-primary hover:text-accent transition-colors duration-300">Home</a>
-                <a href="#skills" class="text-text-primary hover:text-accent transition-colors duration-300">Skills</a>
-                <a href="#experience" class="text-text-primary hover:text-accent transition-colors duration-300">Experience</a>
-                <a href="#projects" class="text-text-primary hover:text-accent transition-colors duration-300">Projects</a>
-                <a href="#certificates" class="text-text-primary hover:text-accent transition-colors duration-300">Certificates</a>
-                <a href="#services" class="text-text-primary hover:text-accent transition-colors duration-300">Services</a>
-                <a href="#contact" class="text-text-primary hover:text-accent transition-colors duration-300">Contact</a>
+                <a href="#portfolio" class="text-text-primary hover:text-accent transition-colors duration-300 py-2">Portfolio</a>
+                <a href="#experience" class="text-text-primary hover:text-accent transition-colors duration-300 py-2">Experience</a>
+                <a href="#projects" class="text-text-primary hover:text-accent transition-colors duration-300 py-2">Projects</a>
+                <a href="#certificates" class="text-text-primary hover:text-accent transition-colors duration-300 py-2">Achievements</a>
             </div>
         </div>
     </nav>
-    <section id="home" class="min-h-screen flex items-center justify-center py-20 px-6 relative overflow-hidden">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
-            <div class="w-full md:w-2/5 mb-12 md:mb-0 flex justify-center fade-in">
-                <div class="card-3d w-80 h-96 bg-secondary rounded-2xl p-6 shadow-2xl glow border border-accent border-opacity-30">
-                    <div class="flex flex-col items-center h-full justify-center">
-                        <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-accent mb-6 pulse-glow">
-                            <img src="fotoku.jpeg" alt="Profile" class="w-full h-full object-cover">
-                        </div>
-                        <h2 class="text-2xl font-bold text-center mb-2 animated-name">Aqeela Nashwa</h2>
-                        <p class="text-text-secondary text-center mb-6">Software Engineer</p>
-                        <a href="cvkila.pdf" download class="w-full px-6 py-3 bg-accent text-primary font-bold rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 pulse-glow text-center flex items-center justify-center">
-                            <i class="fas fa-download mr-2"></i>Download CV
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="w-full md:w-3/5 text-center md:text-left fade-in">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">
-                    <div class="typing-container">
-                        <span class="typing-animation" id="typing-name">Aqeela Nashwa</span>
-                    </div>
-                </h1>
-                <p class="text-xl md:text-2xl text-text-secondary mb-6 fade-in" id="typing-subtitle">Software Engineer</p>
-                <p class="text-lg text-text-primary max-w-2xl mb-8 fade-in">
-                    I am a Software Engineer with experience in backend development, system architecture, and building modern web applications. I work with frameworks like Laravel, Node.js, and modern frontend tools to create scalable and reliable systems.
-                    I also have additional experience in machine learning from several academic projects, enabling me to integrate intelligent features when needed.
-                    I enjoy creating clean, efficient, and end-to-end solutions while continuously improving my skills through real-world projects and research during my Informatics studies.
+
+    <!-- Hero/Portfolio Section -->
+    <section id="portfolio" class="hero-section py-12 md:py-20 px-4 md:px-6 relative overflow-hidden">
+        <div class="container mx-auto">
+            <div class="hero-content">
+                <h1 class="hero-title fade-in">Portfolio</h1>
+                <p class="hero-subtitle fade-in" style="animation-delay: 0.2s;">
+                    Transforming ideas into impactful digital solutions—through code, research, and collaboration.
                 </p>
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <a href="#projects" class="px-6 py-3 bg-accent text-primary font-medium rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 pulse-glow">
-                        View Projects
-                    </a>
-                    <a href="#contact" class="px-6 py-3 border border-accent text-accent font-medium rounded-lg hover:bg-accent hover:bg-opacity-10 transition-all duration-300 transform hover:scale-105">
-                        Contact Me
-                    </a>
-                </div>
             </div>
         </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-            <div class="flex flex-col items-center">
-                <span class="text-text-secondary mb-2">Scroll to explore</span>
-                <div class="w-6 h-10 border-2 border-accent rounded-full flex justify-center">
-                    <div class="w-1 h-3 bg-accent rounded-full mt-2 animate-bounce"></div>
-                </div>
-            </div>
+        <div class="scroll-indicator">
+            <a href="#experience" class="text-accent">
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </div>
     </section>
 
-    <section id="skills" class="py-20 px-6 bg-secondary bg-opacity-50 relative overflow-hidden">
+    <!-- Experience Section - Mobile Optimized -->
+    <section id="experience" class="py-12 md:py-20 px-4 md:px-6 relative overflow-hidden">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Skills & Expertise</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-16 section-title">Experience & Research</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="fade-in">
-                    <h3 class="text-2xl font-bold mb-8 text-accent">Soft Skills</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="fade-in">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Problem Solving</span>
-                                <span class="text-accent">90%</span>
+            <!-- Mobile Timeline -->
+            <div class="timeline-mobile md:hidden">
+                <!-- Item 1 -->
+                <div class="timeline-item-mobile fade-in">
+                    <div class="timeline-content-mobile">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-hands-helping"></i>
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="90"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="fade-in">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Team Collaboration</span>
-                                <span class="text-accent">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85"></div>
+                            <div class="experience-title-container">
+                                <h3 class="experience-title">Independent Community Service</h3>
+                                <p class="experience-subtitle">Pignatelli Triputra University | January – August 2024</p>
                             </div>
                         </div>
                         
-                        <div class="fade-in">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Communication</span>
-                                <span class="text-accent">88%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="88"></div>
-                            </div>
-                        </div>
+                        <img src="pkmm1.jpeg" alt="Community Service" class="experience-image">
                         
-                        <div class="fade-in">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Leadership</span>
-                                <span class="text-accent">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="80"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Hard Skills -->
-                <div class="fade-in">
-                    <h3 class="text-2xl font-bold mb-8 text-accent">Technical Skills</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="fade-in">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Python & AI/ML</span>
-                                <span class="text-accent">95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="95"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="fade-in">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Web Development</span>
-                                <span class="text-accent">90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="90"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="fade-in">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Data Analysis</span>
-                                <span class="text-accent">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="fade-in">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Cloud Computing</span>
-                                <span class="text-accent">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="80"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-16">
-                <h3 class="text-2xl font-bold mb-8 text-center text-accent">Tech Stack</h3>
-                <div class="flex flex-wrap justify-center gap-8">
-                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300">
-                        <i class="fab fa-python text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
-                    </div>
-                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 0.2s;">
-                        <i class="fab fa-js-square text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
-                    </div>
-                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 0.4s;">
-                        <i class="fab fa-react text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
-                    </div>
-                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 0.6s;">
-                        <i class="fab fa-node-js text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
-                    </div>
-                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 0.8s;">
-                        <i class="fab fa-aws text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
-                    </div>
-                    <div class="animate-floating transform hover:scale-125 transition-transform duration-300" style="animation-delay: 1s;">
-                        <i class="fas fa-database text-5xl text-text-secondary hover:text-accent transition-colors duration-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="py-20 px-6 relative overflow-hidden">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Experience & Research</h2>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
-                                <i class="fas fa-hands-helping text-accent"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">Independent Community Service</h3>
-                                <p class="text-text-secondary">Pignatelli Triputra University | January – August 2024</p>
-                            </div>
-                        </div>
-                        
-                        <img src="pkmm1.jpeg" alt="Community Service 1" class="experience-image">
-                        
-                        <p class="text-text-primary mb-4">
+                        <p class="text-text-primary text-sm leading-relaxed mb-4">
                             As part of the community service program, I served as MC and teaching assistant in 
                             technology education activities for elementary school children. Responsible for presenting 
                             materials, teaching Microsoft Word and Canva usage, and providing basic laptop usage 
                             introduction to students.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Public Speaking</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Microsoft Word</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Literacy</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Teaching</span>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Public Speaking</span>
+                            <span class="experience-tag">Microsoft Word</span>
+                            <span class="experience-tag">Digital Literacy</span>
+                            <span class="experience-tag">Teaching</span>
                         </div>
                         
                         <div class="experience-links">
@@ -272,14 +645,200 @@
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
-                                <i class="fas fa-chalkboard-teacher text-accent"></i>
+                
+                <!-- Item 2 -->
+                <div class="timeline-item-mobile fade-in">
+                    <div class="timeline-content-mobile">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-bold">Canva Learning Media Training</h3>
+                            <div class="experience-title-container">
+                                <h3 class="experience-title">Canva Learning Media Training</h3>
+                                <p class="experience-subtitle">Pignatelli Triputra University | October 2024</p>
+                            </div>
+                        </div>
+                        
+                        <img src="pkmm2.jpeg" alt="Canva Training" class="experience-image">
+                        
+                        <p class="text-text-primary text-sm leading-relaxed mb-4">
+                            As part of the community service program, I served as MC and teaching assistant, 
+                            responsible for facilitating training on creating learning media using Canva for 
+                            elementary school educators.
+                        </p>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Public Speaking</span>
+                            <span class="experience-tag">Canva</span>
+                            <span class="experience-tag">Digital Literacy</span>
+                            <span class="experience-tag">Teaching</span>
+                        </div>
+                    
+                        <div class="experience-links">
+                            <a href="https://youtu.be/ZXLjIDZfO_w?si=5chWMK11lovogLBW" target="_blank" class="experience-link">
+                                <i class="fab fa-youtube"></i> Activity Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="timeline-item-mobile fade-in">
+                    <div class="timeline-content-mobile">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="experience-title-container">
+                                <h3 class="experience-title">Research Assistant</h3>
+                                <p class="experience-subtitle">Nusantara Keris Museum | 2024</p>
+                            </div>
+                        </div>
+                        
+                        <img src="research.jpeg" alt="Research Assistant Museum" class="experience-image">
+                        
+                        <p class="text-text-primary text-sm leading-relaxed mb-4">
+                            As a Research Assistant, I collaborated with faculty advisors in research and development 
+                            of a virtual visit platform for Nusantara Keris Museum. Responsible for virtual tour technology 
+                            research, interface design, and system implementation that enables visitors to explore 
+                            Nusantara keris collections digitally with an immersive experience.
+                        </p>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Digital Documentation</span>
+                            <span class="experience-tag">Web Development</span>
+                            <span class="experience-tag">Digital Heritage</span>
+                            <span class="experience-tag">Research</span>
+                        </div>
+                        
+                        <div class="experience-links">
+                            <a href="https://rri.co.id/daerah/1219587/museum-keris-nusantara-luncurkan-fitur-virtual-visit" target="_blank" class="experience-link">
+                                <i class="fas fa-newspaper"></i> Media Coverage
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="timeline-item-mobile fade-in">
+                    <div class="timeline-content-mobile">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="experience-title-container">
+                                <h3 class="experience-title">Fullstack Developer & Digital Marketing</h3>
+                                <p class="experience-subtitle">PKM Project - Lempeng Singkong | 2025</p>
+                            </div>
+                        </div>
+                        
+                        <img src="web.jpeg" alt="Fullstack Development" class="experience-image">
+                        
+                        <p class="text-text-primary text-sm leading-relaxed mb-4">
+                            As Fullstack Developer in the PKM program, responsible for developing business website 
+                            for Lempeng Singkong MSME using Laravel framework. In addition to system development, 
+                            also handled digital marketing by creating viral TikTok content and managing all social 
+                            media to increase brand awareness and product sales.
+                        </p>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Laravel</span>
+                            <span class="experience-tag">Fullstack Development</span>
+                            <span class="experience-tag">Digital Marketing</span>
+                            <span class="experience-tag">TikTok Content</span>
+                            <span class="experience-tag">Social Media</span>
+                            <span class="experience-tag">PHP</span>
+                        </div>
+                        
+                        <div class="experience-links">
+                            <a href="http://griyasingkong.com" target="_blank" class="experience-link">
+                                <i class="fas fa-external-link-alt"></i> Website
+                            </a>
+                            <a href="https://tiktok.com" target="_blank" class="experience-link">
+                                <i class="fab fa-tiktok"></i> TikTok
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 5 -->
+                <div class="timeline-item-mobile fade-in">
+                    <div class="timeline-content-mobile">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="experience-title-container">
+                                <h3 class="experience-title">KRENOVA Finalist & City Representative</h3>
+                                <p class="experience-subtitle">Krenova Competition | 2025</p>
+                            </div>
+                        </div>
+                        
+                        <img src="kren.jpeg" alt="Krenova Competition" class="experience-image">
+                        
+                        <p class="text-text-primary text-sm leading-relaxed mb-4">
+                            As main presenter in the team, successfully brought our innovation system into the Top 15 
+                            KRENOVA Finalists. Responsible for presenting the system to the jury panel and answering 
+                            technical questions. This achievement led the team to represent Solo City in the city-level 
+                            competition, demonstrating recognition for the quality of innovation developed.
+                        </p>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Public Speaking</span>
+                            <span class="experience-tag">Technical Presentation</span>
+                            <span class="experience-tag">Innovation Competition</span>
+                            <span class="experience-tag">Collaboration Team</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop Timeline -->
+            <div class="timeline-desktop hidden md:block">
+                <div class="timeline-item-desktop fade-in">
+                    <div class="timeline-content-desktop">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <div class="experience-title-container">
+                                <h3 class="text-xl font-bold mb-1">Independent Community Service</h3>
+                                <p class="text-text-secondary">Pignatelli Triputra University | January – August 2024</p>
+                            </div>
+                        </div>
+                        
+                        <img src="pkmm1.jpeg" alt="Community Service" class="experience-image">
+                        
+                        <p class="text-text-primary mb-4">
+                            As part of the community service program, I served as MC and teaching assistant in 
+                            technology education activities for elementary school children. Responsible for presenting 
+                            materials, teaching Microsoft Word and Canva usage, and providing basic laptop usage 
+                            introduction to students.
+                        </p>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Public Speaking</span>
+                            <span class="experience-tag">Microsoft Word</span>
+                            <span class="experience-tag">Digital Literacy</span>
+                            <span class="experience-tag">Teaching</span>
+                        </div>
+                        
+                        <div class="experience-links">
+                            <a href="https://youtu.be/uRQJlrswUu0?si=peZ1RNrq_A582I8Z" target="_blank" class="experience-link">
+                                <i class="fab fa-youtube"></i> Activity Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item-desktop fade-in">
+                    <div class="timeline-content-desktop">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="experience-title-container">
+                                <h3 class="text-xl font-bold mb-1">Canva Learning Media Training</h3>
                                 <p class="text-text-secondary">Pignatelli Triputra University | October 2024</p>
                             </div>
                         </div>
@@ -291,11 +850,12 @@
                             responsible for facilitating training on creating learning media using Canva for 
                             elementary school educators.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Public Speaking</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Canva</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Literacy</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Teaching</span>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Public Speaking</span>
+                            <span class="experience-tag">Canva</span>
+                            <span class="experience-tag">Digital Literacy</span>
+                            <span class="experience-tag">Teaching</span>
                         </div>
                     
                         <div class="experience-links">
@@ -306,20 +866,18 @@
                     </div>
                 </div>
                 
-               
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
-                                <i class="fas fa-search text-accent"></i>
+                <div class="timeline-item-desktop fade-in">
+                    <div class="timeline-content-desktop">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-search"></i>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-bold">Research Assistant</h3>
+                            <div class="experience-title-container">
+                                <h3 class="text-xl font-bold mb-1">Research Assistant</h3>
                                 <p class="text-text-secondary">Nusantara Keris Museum | 2024</p>
                             </div>
                         </div>
                         
-                      
                         <img src="research.jpeg" alt="Research Assistant Museum" class="experience-image">
                         
                         <p class="text-text-primary mb-4">
@@ -328,14 +886,14 @@
                             research, interface design, and system implementation that enables visitors to explore 
                             Nusantara keris collections digitally with an immersive experience.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Documentation</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Web Development</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Heritage</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Research</span>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Digital Documentation</span>
+                            <span class="experience-tag">Web Development</span>
+                            <span class="experience-tag">Digital Heritage</span>
+                            <span class="experience-tag">Research</span>
                         </div>
                         
-                      
                         <div class="experience-links">
                             <a href="https://rri.co.id/daerah/1219587/museum-keris-nusantara-luncurkan-fitur-virtual-visit" target="_blank" class="experience-link">
                                 <i class="fas fa-newspaper"></i> Media Coverage
@@ -344,20 +902,18 @@
                     </div>
                 </div>
                 
-               
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
-                                <i class="fas fa-code text-accent"></i>
+                <div class="timeline-item-desktop fade-in">
+                    <div class="timeline-content-desktop">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-code"></i>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-bold">Fullstack Developer & Digital Marketing</h3>
+                            <div class="experience-title-container">
+                                <h3 class="text-xl font-bold mb-1">Fullstack Developer & Digital Marketing</h3>
                                 <p class="text-text-secondary">PKM Project - Lempeng Singkong | 2025</p>
                             </div>
                         </div>
                         
-                       
                         <img src="web.jpeg" alt="Fullstack Development" class="experience-image">
                         
                         <p class="text-text-primary mb-4">
@@ -366,16 +922,16 @@
                             also handled digital marketing by creating viral TikTok content and managing all social 
                             media to increase brand awareness and product sales.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Laravel</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Fullstack Development</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Marketing</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">TikTok Content</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Social Media</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">PHP</span>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Laravel</span>
+                            <span class="experience-tag">Fullstack Development</span>
+                            <span class="experience-tag">Digital Marketing</span>
+                            <span class="experience-tag">TikTok Content</span>
+                            <span class="experience-tag">Social Media</span>
+                            <span class="experience-tag">PHP</span>
                         </div>
                         
-                       
                         <div class="experience-links">
                             <a href="http://griyasingkong.com" target="_blank" class="experience-link">
                                 <i class="fas fa-external-link-alt"></i> Griya Singkong Website
@@ -387,19 +943,17 @@
                     </div>
                 </div>
                 
-               
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
-                                <i class="fas fa-trophy text-accent"></i>
+                <div class="timeline-item-desktop fade-in">
+                    <div class="timeline-content-desktop">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-trophy"></i>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-bold">KRENOVA Finalist & City Representative</h3>
+                            <div class="experience-title-container">
+                                <h3 class="text-xl font-bold mb-1">KRENOVA Finalist & City Representative</h3>
                                 <p class="text-text-secondary">Krenova Competition | 2025</p>
                             </div>
                         </div>
-                        
                         
                         <img src="kren.jpeg" alt="Krenova Competition" class="experience-image">
                         
@@ -409,11 +963,12 @@
                             technical questions. This achievement led the team to represent Solo City in the city-level 
                             competition, demonstrating recognition for the quality of innovation developed.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Public Speaking</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Technical Presentation</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Innovation Competition</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Team Leadership</span>
+                        
+                        <div class="experience-tags">
+                            <span class="experience-tag">Public Speaking</span>
+                            <span class="experience-tag">Technical Presentation</span>
+                            <span class="experience-tag">Innovation Competition</span>
+                            <span class="experience-tag">Collaboration Team</span>
                         </div>
                     </div>
                 </div>
@@ -421,199 +976,386 @@
         </div>
     </section>
 
-    
-    <section id="projects" class="py-20 px-6 bg-secondary bg-opacity-50 relative overflow-hidden">
+    <!-- Projects Section -->
+    <section id="projects" class="py-12 md:py-20 px-4 md:px-6 bg-secondary bg-opacity-50 relative overflow-hidden">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Projects</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-16 section-title">Featured Projects</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-20">
-                    <div class="h-48 relative overflow-hidden">
-                        <img src="proj3.jpeg" 
-                             alt="AgroAI Project" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">AgroAI - Smart Agriculture</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-text-secondary mb-4">AI system for optimal crop recommendations based on soil condition analysis using machine learning and neural networks.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Python</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">TensorFlow</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Streamlit</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Machine Learning</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/aqeela-e/AgroAI" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fab fa-github mr-2"></i> GitHub
-                            </a>
-                            <a href="https://agroai.streamlit.app" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-20">
-                    <div class="h-48 relative overflow-hidden">
-                        <img src="proj1.jpeg" 
-                             alt="SmartNotes Project" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">SmartNotes Web App</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-text-secondary mb-4">Web application with hybrid cryptography (RC4 + XChaCha20) for data security with SINTA 5 journal publication research.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Laravel</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Cryptography</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">JavaScript</span>
-                            <span class="px-3 py-1 bg-accent text-primary rounded-full text-xs font-bold">SINTA 5</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://aqeela-e.github.io/secure-notes/" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fab fa-github mr-2"></i> GitHub
-                            </a>
-                            <a href="https://smartnotes-app.com" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-              
-                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-20">
-                    <div class="h-48 relative overflow-hidden">
-                        <img src="proj2.jpeg" 
-                             alt="Griya Singkong Project" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">Griya Singkong E-Commerce</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-text-secondary mb-4">E-commerce platform for local MSME with digital marketing features and viral TikTok content to boost sales.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Laravel</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Digital Marketing</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">TikTok API</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">MySQL</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/aqeela-e/lempeng-cengklok" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fab fa-github mr-2"></i> GitHub
-                            </a>
-                            <a href="https://griyasingkong.com" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fas fa-external-link-alt mr-2"></i> Website
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                 <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-20">
-                    <div class="h-48 relative overflow-hidden">
-                        <img src="typg.jpg" 
-                             alt="Typography Project" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">Web Typography</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-text-secondary mb-4">Interactive frontend experience featuring kinetic typography, horizontal scrolling, and custom motion effects built with Tailwind CSS, GSAP ScrollTrigger, and advanced UI animations.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">HTML</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Tailwind CSS</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Javascript</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">GSAP</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/aqeela-e/typography" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fab fa-github mr-2"></i> GitHub
-                            </a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Web Typography -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://aqeela-e.github.io/typography/" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
                             <a href="https://aqeela-e.github.io/typography/" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
                                 <i class="fas fa-external-link-alt mr-2"></i> Live Demo
                             </a>
                         </div>
                     </div>
-                </div>
-
-                 <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-20">
-                    <div class="h-48 relative overflow-hidden">
-                        <img src="proj4.jpg" 
-                             alt="Griya Singkong Project" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">Website Trading</h3>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">Web Typography</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            Interactive frontend experience featuring kinetic typography and custom motion effects.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">HTML</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Tailwind CSS</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">GSAP</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/typography" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <p class="text-text-secondary mb-4">A next-gen crypto trading platform built for speed, transparency, and limitless growth powered by real-time analytics and secure blockchain technology.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">HTML</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Tailwind CSS</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Javascript</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">GSAP</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/aqeela-e/kripto" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fab fa-github mr-2"></i> GitHub
-                            </a>
+                </div>
+
+                <!-- Crypto Trading Platform -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://kripto-eight.vercel.app/" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
                             <a href="https://kripto-eight.vercel.app/" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fas fa-external-link-alt mr-2"></i> Website
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">Crypto Trading Platform</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            Next-gen crypto trading platform with real-time analytics and secure blockchain technology.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">JavaScript</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Tailwind CSS</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">GSAP</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/kripto" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
                             </a>
                         </div>
                     </div>
                 </div>
 
-                 <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-20">
-                    <div class="h-48 relative overflow-hidden">
-                        <img src="proj5.jpg" 
-                             alt="Griya Singkong Project" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">Website TrackLog</h3>
+                <!-- TrackLog Landing Page -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://track-log.vercel.app/" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
+                            <a href="https://track-log.vercel.app/" target="_blank" 
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <p class="text-text-secondary mb-4">Corporate-style landing page designed for B2B conversion optimization with functional map.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">HTML</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Tailwind CSS</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">Javascript</span>
-                            <span class="px-3 py-1 bg-primary rounded-full text-xs text-accent glow">B2B</span>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">TrackLog Landing Page</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            Corporate-style landing page designed for B2B conversion optimization with interactive features.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">HTML</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">CSS</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">JavaScript</span>
                         </div>
-                        <div class="flex gap-3">
+                        <div class="flex gap-2 md:gap-3">
                             <a href="https://github.com/aqeela-e/TrackLog" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fab fa-github mr-2"></i> GitHub
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
                             </a>
-                            <a href="https://track-log.vercel.app/" target="_blank" 
-                               class="flex-1 text-accent font-medium hover:underline flex items-center justify-center transform hover:translate-x-2 transition-transform duration-300 bg-primary py-2 px-4 rounded-lg hover:bg-opacity-20">
-                                <i class="fas fa-external-link-alt mr-2"></i> Website
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secure Notes -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://aqeela-e.github.io/secure-notes/" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
+                            <a href="https://aqeela-e.github.io/secure-notes/" target="_blank" 
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">SmartNotes Web App</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            Web application with hybrid cryptography (RC4 + XChaCha20) for secure note-taking with SINTA 5 journal publication research.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Laravel</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Cryptography</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">JavaScript</span>
+                            <span class="px-2 md:px-3 py-1 bg-green-100 text-green-600 rounded-full text-xs">SINTA 5</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/secure-notes" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Griya Singkong E-commerce -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://griyasingkong.com/products" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
+                            <a href="https://griyasingkong.com/products" target="_blank" 
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">Griya Singkong E-commerce</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            E-commerce platform for local MSME with digital marketing features and viral TikTok content to boost sales.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Laravel</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">MySQL</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Digital Marketing</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">E-commerce</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/lempeng-cengklok" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PREXA - Cardiovascular Risk Prediction -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://web-production-08b82.up.railway.app/" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
+                            <a href="https://web-production-08b82.up.railway.app/" target="_blank" 
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">PREXA - Cardiovascular Risk Prediction</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            AI-powered web application for predicting cardiovascular disease risk patterns using machine learning algorithms.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Python</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Machine Learning</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Flask</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Healthcare AI</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/prexa" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDA Document Validator -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://pda-production-2a6a.up.railway.app/" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
+                            <a href="https://pda-production-2a6a.up.railway.app/" target="_blank" 
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">PDA Document Validator</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            Simulator for validating and verifying document authenticity using pattern recognition and digital signatures.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Python</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">FastAPI</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Document Processing</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Validation</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/pda-validator" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Princess Adventure Game -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://gd.games/games/e62952c5-dea3-4bce-96bb-d4870b39659c" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
+                            <a href="https://gd.games/games/e62952c5-dea3-4bce-96bb-d4870b39659c" target="_blank" 
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Play Game
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">Princess Adventure Game</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            2D adventure game developed with GDevelop featuring puzzle-solving, character interactions, and engaging storyline.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">GDevelop</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Game Development</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">2D Graphics</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">JavaScript</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/princess-adventure" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://aqeela-e.github.io/system-status/" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
+                            <a href="https://aqeela-e.github.io/system-status/" target="_blank" 
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">System Status | Industrial</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            Technical dashboard aesthetic focusing on high information density and machine readability.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">HTML</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Tailwind CSS</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">JavaScript</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/system-status" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://aqeela-e.github.io/store-gumdrop/" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
+                            <a href="https://aqeela-e.github.io/store-gumdrop/" target="_blank" 
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">GUMDROP | Neo-Brutalism</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            Radical Pop-Art store concept. High contrast, bold borders, and aggressive shadows.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">HTML</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Tailwind CSS</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">JavaScript</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">GSAP</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/store-gumdrop" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Liver Lesion Segmentation -->
+                <div class="project-card bg-secondary rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                    <div class="project-preview-container">
+                        <div class="preview-loading"></div>
+                        <iframe src="https://aygfb7kojt8kyrlehuhyhq.streamlit.app/" class="project-preview" 
+                                loading="lazy" frameborder="0" scrolling="no"></iframe>
+                        <div class="preview-overlay">
+                            <a href="https://aygfb7kojt8kyrlehuhyhq.streamlit.app/" target="_blank" 
+                               class="px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">Liver Lesion Segmentation</h3>
+                        <p class="text-gray-600 mb-3 md:mb-4 text-xs md:text-sm">
+                            Computer vision application using deep learning for automatic segmentation of liver lesions from ultrasound images.
+                        </p>
+                        <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Python</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Deep Learning</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Streamlit</span>
+                            <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">Medical Imaging</span>
+                        </div>
+                        <div class="flex gap-2 md:gap-3">
+                            <a href="https://github.com/aqeela-e/liver-segmentation" target="_blank" 
+                               class="flex-1 text-center py-2 px-3 md:px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm">
+                                <i class="fab fa-github mr-2"></i> Code
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- More Projects Button -->
+            <div class="text-center mt-8 md:mt-12 fade-in">
+                <a href="https://github.com/aqeela-e" target="_blank" 
+                   class="inline-flex items-center px-4 md:px-6 py-2 md:py-3 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                    <i class="fab fa-github mr-2"></i> View More Projects on GitHub
+                </a>
+            </div>
         </div>
     </section>
 
-   
-    <section id="certificates" class="py-20 px-6 relative overflow-hidden">
+    <!-- Achievements Section -->
+    <section id="certificates" class="py-12 md:py-20 px-4 md:px-6 relative overflow-hidden">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Certificates & Achievements</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-16 section-title">Achievements & Certificates</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-               
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
                     <div class="h-48 relative overflow-hidden">
                         <img src="sertif1.jpeg" 
@@ -622,19 +1364,19 @@
                             <i class="fab fa-aws text-4xl text-white"></i>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
+                    <div class="p-4 md:p-6">
+                        <div class="flex items-center mb-3 md:mb-4">
                             <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
                                 <i class="fas fa-cloud text-accent"></i>
                             </div>
-                            <h3 class="text-xl font-bold">AWS Back-End Academy</h3>
+                            <h3 class="text-lg md:text-xl font-bold">AWS Back-End Academy</h3>
                         </div>
-                        <p class="text-text-secondary mb-4 text-sm">Dicoding x AWS - Cloud Computing fundamentals, EC2, S3, Lambda, and backend development with JavaScript/Node.js.</p>
+                        <p class="text-text-secondary mb-3 md:mb-4 text-xs md:text-sm">Dicoding x AWS - Cloud Computing fundamentals, EC2, S3, Lambda, and backend development with JavaScript/Node.js.</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-accent text-sm">2025</span>
+                            <span class="text-accent text-xs md:text-sm">2025</span>
                             <div class="flex gap-2">
                                 <a href="https://www.dicoding.com/certificates/your-certificate-id" target="_blank" 
-                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                   class="text-accent hover:text-white text-xs md:text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
                                     <i class="fas fa-external-link-alt mr-1"></i> View
                                 </a>
                             </div>
@@ -642,7 +1384,6 @@
                     </div>
                 </div>
 
-               
                 <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
                     <div class="h-48 relative overflow-hidden">
                         <img src="sertif2.jpeg" 
@@ -651,19 +1392,19 @@
                             <i class="fas fa-robot text-4xl text-white"></i>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
+                    <div class="p-4 md:p-6">
+                        <div class="flex items-center mb-3 md:mb-4">
                             <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
                                 <i class="fas fa-brain text-accent"></i>
                             </div>
-                            <h3 class="text-xl font-bold">AI Engineer Track</h3>
+                            <h3 class="text-lg md:text-xl font-bold">AI Engineer Track</h3>
                         </div>
-                        <p class="text-text-secondary mb-4 text-sm">IDCamp 2025 by Dicoding x Indosat - Fundamental AI, machine learning models, data preprocessing, and model evaluation.</p>
+                        <p class="text-text-secondary mb-3 md:mb-4 text-xs md:text-sm">IDCamp 2025 by Dicoding x Indosat - Fundamental AI, machine learning models, data preprocessing, and model evaluation.</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-accent text-sm">2025</span>
+                            <span class="text-accent text-xs md:text-sm">2025</span>
                             <div class="flex gap-2">
                                 <a href="https://www.dicoding.com/certificates/your-ai-certificate" target="_blank" 
-                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                   class="text-accent hover:text-white text-xs md:text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
                                     <i class="fas fa-external-link-alt mr-1"></i> View
                                 </a>
                             </div>
@@ -671,7 +1412,6 @@
                     </div>
                 </div>
 
-               
                 <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
                     <div class="h-48 relative overflow-hidden">
                         <img src="sertif3.jpeg" 
@@ -680,19 +1420,19 @@
                             <i class="fas fa-shield-alt text-4xl text-white"></i>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
+                    <div class="p-4 md:p-6">
+                        <div class="flex items-center mb-3 md:mb-4">
                             <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
                                 <i class="fas fa-lock text-accent"></i>
                             </div>
-                            <h3 class="text-xl font-bold">Cybersecurity Fundamentals</h3>
+                            <h3 class="text-lg md:text-xl font-bold">Cybersecurity Fundamentals</h3>
                         </div>
-                        <p class="text-text-secondary mb-4 text-sm">Kominfo & Cisco Networking Academy - 4 cybersecurity domains: attacks/concepts, data privacy, organizational protection, career paths.</p>
+                        <p class="text-text-secondary mb-3 md:mb-4 text-xs md:text-sm">Kominfo & Cisco Networking Academy - 4 cybersecurity domains: attacks/concepts, data privacy, organizational protection, career paths.</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-accent text-sm">2024</span>
+                            <span class="text-accent text-xs md:text-sm">2024</span>
                             <div class="flex gap-2">
                                 <a href="https://www.netacad.com/certificates/your-cyber-cert" target="_blank" 
-                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                   class="text-accent hover:text-white text-xs md:text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
                                     <i class="fas fa-external-link-alt mr-1"></i> View
                                 </a>
                             </div>
@@ -700,7 +1440,6 @@
                     </div>
                 </div>
 
-              
                 <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
                     <div class="h-48 relative overflow-hidden">
                         <img src="sertif4.jpeg" 
@@ -709,19 +1448,19 @@
                             <i class="fas fa-server text-4xl text-white"></i>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
+                    <div class="p-4 md:p-6">
+                        <div class="flex items-center mb-3 md:mb-4">
                             <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
                                 <i class="fas fa-code text-accent"></i>
                             </div>
-                            <h3 class="text-xl font-bold">Data Analyst</h3>
+                            <h3 class="text-lg md:text-xl font-bold">Data Analyst</h3>
                         </div>
-                        <p class="text-text-secondary mb-4 text-sm">Exploring Data Analyst Careers Through Microsoft Excel.</p>
+                        <p class="text-text-secondary mb-3 md:mb-4 text-xs md:text-sm">Exploring Data Analyst Careers Through Microsoft Excel.</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-accent text-sm">2023</span>
+                            <span class="text-accent text-xs md:text-sm">2023</span>
                             <div class="flex gap-2">
                                 <a href="https://www.dicoding.com/certificates/your-backend-cert" target="_blank" 
-                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                   class="text-accent hover:text-white text-xs md:text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
                                     <i class="fas fa-external-link-alt mr-1"></i> View
                                 </a>
                             </div>
@@ -729,7 +1468,6 @@
                     </div>
                 </div>
 
-               
                 <div class="certificate-card bg-secondary rounded-xl overflow-hidden shadow-xl border border-accent border-opacity-30">
                     <div class="h-48 relative overflow-hidden">
                         <img src="jurnal.jpeg" 
@@ -738,23 +1476,23 @@
                             <i class="fas fa-book text-4xl text-white"></i>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
+                    <div class="p-4 md:p-6">
+                        <div class="flex items-center mb-3 md:mb-4">
                             <div class="w-10 h-10 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-3">
                                 <i class="fas fa-graduation-cap text-accent"></i>
                             </div>
-                            <h3 class="text-xl font-bold">SINTA 5 Journal Publication</h3>
+                            <h3 class="text-lg md:text-xl font-bold">SINTA 5 Journal Publication</h3>
                         </div>
-                        <p class="text-text-secondary mb-4 text-sm">Hybrid cryptography research publication in SINTA 5 accredited journal - contribution to data security and encryption.</p>
+                        <p class="text-text-secondary mb-3 md:mb-4 text-xs md:text-sm">Hybrid cryptography research publication in SINTA 5 accredited journal - contribution to data security and encryption.</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-accent text-sm">2024</span>
+                            <span class="text-accent text-xs md:text-sm">2024</span>
                             <div class="flex gap-2">
                                 <a href="https://sinta.kemdikbud.go.id/journals/profile/your-journal" target="_blank" 
-                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                   class="text-accent hover:text-white text-xs md:text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
                                     <i class="fas fa-external-link-alt mr-1"></i> Journal
                                 </a>
                                 <a href="https://your-research-paper-link.com" target="_blank" 
-                                   class="text-accent hover:text-white text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
+                                   class="text-accent hover:text-white text-xs md:text-sm flex items-center transform hover:translate-x-1 transition-transform duration-300">
                                     <i class="fas fa-file-pdf mr-1"></i> PDF
                                 </a>
                             </div>
@@ -762,200 +1500,113 @@
                     </div>
                 </div>
             </div>
-
-           
-            <div class="mt-16 text-center">
-                <h3 class="text-2xl font-bold mb-8 text-accent">Additional Achievements</h3>
-                <div class="flex flex-wrap justify-center gap-6">
-                    <div class="bg-primary rounded-xl p-4 border border-accent border-opacity-20 transform hover:scale-105 transition-transform duration-300">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mx-auto mb-2">
-                            <i class="fas fa-medal text-accent text-2xl"></i>
-                        </div>
-                        <p class="text-text-primary text-sm font-semibold">Journal Publication</p>
-                        <p class="text-text-secondary text-xs">2025</p>
-                    </div>
-                    <div class="bg-primary rounded-xl p-4 border border-accent border-opacity-20 transform hover:scale-105 transition-transform duration-300">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mx-auto mb-2">
-                            <i class="fas fa-star text-accent text-2xl"></i>
-                        </div>
-                        <p class="text-text-primary text-sm font-semibold">5+ Dicoding Certs</p>
-                        <p class="text-text-secondary text-xs">Avg 90%+ Score</p>
-                    </div>
-                    <div class="bg-primary rounded-xl p-4 border border-accent border-opacity-20 transform hover:scale-105 transition-transform duration-300">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mx-auto mb-2">
-                            <i class="fas fa-project-diagram text-accent text-2xl"></i>
-                        </div>
-                        <p class="text-text-primary text-sm font-semibold">20+ Projects</p>
-                        <p class="text-text-secondary text-xs">Completed</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    
-    <section id="services" class="py-20 px-6 bg-secondary bg-opacity-50 relative overflow-hidden">
+    <!-- Footer -->
+    <footer class="py-8 md:py-12 px-4 md:px-6 bg-secondary">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Services</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-               
-                <div class="card-3d bg-primary rounded-xl p-8 shadow-xl border border-accent border-opacity-20">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
-                            <i class="fas fa-tasks text-2xl text-accent"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold">Assignment Services</h3>
-                    </div>
-                    <p class="text-text-secondary mb-6">
-                        Providing programming, machine learning, and AI assignment services with guaranteed quality and timely delivery.
-                    </p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-accent mr-3"></i>
-                            <span>Programming Assignments (Python, Java, C++)</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-accent mr-3"></i>
-                            <span>Machine Learning Projects</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-accent mr-3"></i>
-                            <span>Data Analysis & Visualization</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-accent mr-3"></i>
-                            <span>Web Development Projects</span>
-                        </li>
-                    </ul>
-                   <a href="https://wa.me/6287878581257" class="px-6 py-3 bg-accent text-primary font-medium rounded-lg inline-block hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 pulse-glow">
-                        Contact via WhatsApp
-                    </a>
-                </div>
-                
-                
-                <div class="card-3d bg-primary rounded-xl p-8 shadow-xl border border-accent border-opacity-20">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mr-4">
-                            <i class="fas fa-laptop-code text-2xl text-accent"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold">Project Development</h3>
-                    </div>
-                    <p class="text-text-secondary mb-6">
-                        Developing small to medium scale projects with focus on AI, machine learning, and web development.
-                    </p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-accent mr-3"></i>
-                            <span>AI & Machine Learning Solutions</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-accent mr-3"></i>
-                            <span>Web Application Development</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-accent mr-3"></i>
-                            <span>Data Processing & Analysis</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-accent mr-3"></i>
-                            <span>API Development & Integration</span>
-                        </li>
-                    </ul>
-                    <a href="https://wa.me/6287878581257?" class="px-6 py-3 bg-accent text-primary font-medium rounded-lg inline-block hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 pulse-glow">
-                    Consult Project
-                    </a>
-                </div>
+            <div class="flex justify-center items-center space-x-6 md:space-x-8">
+                <a href="https://github.com/aqeela-e" target="_blank" 
+                   class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                    <i class="fab fa-github text-xl md:text-2xl"></i>
+                </a>
+                <a href="https://instagram.com/kilaaysl" target="_blank" 
+                   class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                    <i class="fab fa-instagram text-xl md:text-2xl"></i>
+                </a>
+                <a href="https://wa.me/6287878581257" target="_blank" 
+                   class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                    <i class="fab fa-whatsapp text-xl md:text-2xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/aqeela-nashwa" target="_blank" 
+                   class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                    <i class="fab fa-linkedin text-xl md:text-2xl"></i>
+                </a>
             </div>
-        </div>
-    </section>
-
-   
-    <section id="contact" class="py-20 px-6">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Contact</h2>
-            
-            <div class="card-3d bg-secondary rounded-xl p-8 shadow-xl border border-accent border-opacity-30">
-                <div class="text-center mb-8">
-                    <h3 class="text-2xl font-bold mb-4 text-accent">Let's Collaborate!</h3>
-                    <p class="text-text-secondary max-w-2xl mx-auto">
-                        Interested in working together or have questions? Feel free to reach out through the contacts below.
-                    </p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <a href="mailto:nashwaaqeela562@gmail.com" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
-                            <i class="fas fa-envelope text-2xl text-accent"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">Email</h4>
-                        <p class="text-text-secondary text-sm">nashwaaqeela562@gmail.com</p>
-                    </a>
-                    
-                    <a href="tel:087878581257" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
-                            <i class="fas fa-phone text-2xl text-accent"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">Phone</h4>
-                        <p class="text-text-secondary text-sm">+62 878-7858-1257</p>
-                    </a>
-                    
-                    <div class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
-                            <i class="fas fa-map-marker-alt text-2xl text-accent"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">Location</h4>
-                        <p class="text-text-secondary text-sm">Surakarta, Indonesia</p>
-                    </div>
-                    
-                    <a href="https://linkedin.com/in/aqeela-nashwa" target="_blank" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
-                            <i class="fab fa-linkedin text-2xl text-accent"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">LinkedIn</h4>
-                        <p class="text-text-secondary text-sm">Aqeela Nashwa</p>
-                    </a>
-                    
-                    <a href="https://github.com/aqeela-e" target="_blank" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
-                            <i class="fab fa-github text-2xl text-accent"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">GitHub</h4>
-                        <p class="text-text-secondary text-sm">aqeela-e</p>
-                    </a>
-                    
-                    <a href="https://instagram.com/kilaaysl" target="_blank" class="flex flex-col items-center text-center p-6 bg-primary rounded-xl transform hover:scale-105 transition-all duration-300">
-                        <div class="w-16 h-16 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
-                            <i class="fab fa-instagram text-2xl text-accent"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">Instagram</h4>
-                        <p class="text-text-secondary text-sm">@kilaaysl</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-  
-    <footer class="py-8 px-6 bg-secondary">
-        <div class="container mx-auto text-center">
-            <p class="text-text-secondary">© 2025 Aqeela Nashwa. All rights reserved.</p>
         </div>
     </footer>
 
-  
-    <script src="script.js"></script>
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.timeline-item-mobile, .timeline-item-desktop, .project-card, .section-title').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Project preview loading state
+        document.querySelectorAll('.project-preview').forEach(iframe => {
+            iframe.addEventListener('load', function() {
+                const loading = this.previousElementSibling;
+                if (loading && loading.classList.contains('preview-loading')) {
+                    loading.style.display = 'none';
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.classList.add('shadow-sm');
+            }
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add floating animation to project cards with delay
+            document.querySelectorAll('.project-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
